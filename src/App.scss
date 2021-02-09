@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Montserrat:wght@500&family=Lexend+Mega&display=swap");
+
+body {
+  margin: 0; // remove outer white border
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 300px;
+  height: 350px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  gap: 3px;
+  font-family: Lexend Mega;
+  
+  .display-div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: white;
+    overflow: hidden;
+    
+    #display-history {
+      flex: 1;
+      display: flex;
+      height: auto;
+      max-width: 1fr; 
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 5px;
+      background-color: white;
+      color: orange;
+    }
+    #display {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 5px;
+      background-color: white;
+    }
+  }
+  .input-div {
+    flex: 5;
+    display: grid;
+    grid-template-column: repeat(4, 1fr);
+    grid-template-row: repeat(5, 1fr);
+    grid-template-areas:
+      "key-ac key-ac  key-div key-mult"
+      "key-7  key-8   key-9   key-sub"
+      "key-4  key-5   key-6   key-add"
+      "key-1  key-2   key-3   key-calc"
+      "key-0  key-0   key-dec key-calc";
+    gap: 1px;
+    
+    
+    /* make text unselectable */
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+    
+    /* general key style setup */
+    .key {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      opacity: 0.95;
+    }
+    .key:hover { // hover animation
+      opacity: 1;
+    }
+    .key:active { // mousedown animation
+      -webkit-transform:scale(0.95);
+      -moz-transform:scale(0.95);
+      -ms-transform:scale(0.95);
+      transform:scale(0.95);
+    }
+    
+    /* key color setup  */
+    .clear-key { background-color: orange; }
+    .calc-key { background-color: orange; }
+    .num-key { background-color: white; color: black } // dark gray
+    .op-key { background-color: lightgray; color: black }
+    
+    /* key grid area setup  */
+    #zero { grid-area: key-0; }
+    #one { grid-area: key-1; }
+    #two { grid-area: key-2; }
+    #three { grid-area: key-3; }
+    #four { grid-area: key-4; }
+    #five { grid-area: key-5; }
+    #six { grid-area: key-6; }
+    #seven { grid-area: key-7; }
+    #eight { grid-area: key-8; }
+    #nine { grid-area: key-9; }
+    #equals { grid-area: key-calc; }
+    #add { grid-area: key-add; }
+    #subtract { grid-area: key-sub; }
+    #multiply { grid-area: key-mult; }
+    #divide { grid-area: key-div; }
+    #decimal { grid-area: key-dec; }
+    #clear { grid-area: key-ac; }
+  }
+}
+.credit {
+  margin-top: 10px;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 10px;
+  
+  a:link, a:visited{
+    color: black;
+  }
+}
