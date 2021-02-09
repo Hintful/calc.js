@@ -3,8 +3,11 @@ import './App.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
+import ReactGA from 'react-ga';
 
 const TITLE = "calc.js";
+
+ReactGA.initialize("G-D3Z7LQS3WW");
 
 function isOp(s) {
   return s === '+' || s === '-' || s === '/' || s === '*';
@@ -22,7 +25,14 @@ class Calculator extends React.Component {
     // this.handleClick = this.handleClick.bind(this);
     this.inputNumber = this.inputNumber.bind(this);
   }
+  componentDidMount() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }
   inputNumber(num) {
+    ReactGA.event({
+      category: 'calc.js user',
+      action: 'Input number'
+    });
     if(num === ".") {
       if(this.state.value === "0" && !this.state.decimalUsed) { 
         this.setState( { value: "0.", history: "0.", decimalUsed: true }); 
@@ -45,6 +55,10 @@ class Calculator extends React.Component {
     }
   }
   inputOperation(op) {
+    ReactGA.event({
+      category: 'calc.js user',
+      action: 'Input operator'
+    });
     // still need to implement negative number calculation
     const lastIndex = this.state.history.length - 1;
     if(this.state.evaluated) {
@@ -76,6 +90,10 @@ class Calculator extends React.Component {
     }
   }
   clear() {
+    ReactGA.event({
+      category: 'calc.js user',
+      action: 'Input clear'
+    });
     this.setState({
       history: "",
       value: "0",
@@ -84,6 +102,10 @@ class Calculator extends React.Component {
     })
   }
   evaluate() {
+    ReactGA.event({
+      category: 'calc.js user',
+      action: 'Input evaluate'
+    });
     const result = eval(this.state.history).toString();
     this.setState(state => ({ 
       value: result,
