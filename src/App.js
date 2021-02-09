@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import ReactGA from 'react-ga';
+import { evaluate } from 'mathjs';
 
 const TITLE = "calc.js";
 
@@ -106,7 +107,7 @@ class Calculator extends React.Component {
       category: 'calc.js user',
       action: 'Input evaluate'
     });
-    const result = eval(this.state.history).toString();
+    const result = evaluate(this.state.history).toString();
     this.setState(state => ({ 
       value: result,
       history: state.history.concat("=").concat(result),
