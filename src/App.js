@@ -148,7 +148,7 @@ class Calculator extends React.Component {
           </div>
         </div>
         <div class="credit">
-          Coded and designed by <a href="https://kurtchoi.dev" target="_blank">Kurt Choi</a>
+          Coded and designed by <u>Kurt Choi</u>
         </div>
       </div>
     );
