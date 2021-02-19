@@ -1,14 +1,23 @@
 import logo from './logo.svg';
 import './App.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import ReactGA from 'react-ga';
 import { evaluate } from 'mathjs';
 
-const TITLE = "calc.js";
+const TITLE = "calc.js"
 
-ReactGA.initialize("G-D3Z7LQS3WW");
+function usePageViews() {
+  useEffect(() => {
+    if(!window.GA_INIT) {
+      ReactGA.initialize("UA-186165133-1");
+      window.GA_INIT = true;
+    }
+    ReactGA.set({ page: window.location.pathname });
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+}
 
 function isOp(s) {
   return s === '+' || s === '-' || s === '/' || s === '*';
@@ -31,7 +40,7 @@ class Calculator extends React.Component {
   }
   inputNumber(num) {
     ReactGA.event({
-      category: 'calc.js user',
+      category: 'calc.js',
       action: 'Input number'
     });
     if(num === ".") {
@@ -57,7 +66,7 @@ class Calculator extends React.Component {
   }
   inputOperation(op) {
     ReactGA.event({
-      category: 'calc.js user',
+      category: 'calc.js',
       action: 'Input operator'
     });
     // still need to implement negative number calculation
@@ -92,7 +101,7 @@ class Calculator extends React.Component {
   }
   clear() {
     ReactGA.event({
-      category: 'calc.js user',
+      category: 'calc.js',
       action: 'Input clear'
     });
     this.setState({
@@ -104,7 +113,7 @@ class Calculator extends React.Component {
   }
   evaluate() {
     ReactGA.event({
-      category: 'calc.js user',
+      category: 'calc.js',
       action: 'Input evaluate'
     });
     const result = evaluate(this.state.history).toString();
@@ -156,6 +165,8 @@ class Calculator extends React.Component {
 }
 
 function App() {
+  usePageViews();
+
   return (
     <div className="App">
       <Helmet>
